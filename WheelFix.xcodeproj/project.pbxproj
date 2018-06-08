@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90339B8920CAE8AA00005058 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90339B8820CAE8AA00005058 /* StatusMenuController.swift */; };
 		908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AC64720CAC8E100B73296 /* AppDelegate.swift */; };
 		908AC64A20CAC8E100B73296 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64920CAC8E100B73296 /* Assets.xcassets */; };
 		908AC64D20CAC8E100B73296 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64B20CAC8E100B73296 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90339B8820CAE8AA00005058 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		908AC64420CAC8E100B73296 /* WheelFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheelFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		908AC64720CAC8E100B73296 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		908AC64920CAC8E100B73296 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				908AC64B20CAC8E100B73296 /* MainMenu.xib */,
 				908AC64E20CAC8E100B73296 /* Info.plist */,
 				908AC64F20CAC8E100B73296 /* WheelFix.entitlements */,
+				90339B8820CAE8AA00005058 /* StatusMenuController.swift */,
 			);
 			path = WheelFix;
 			sourceTree = "<group>";
@@ -92,6 +95,7 @@
 				TargetAttributes = {
 					908AC64320CAC8E100B73296 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -131,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90339B8920CAE8AA00005058 /* StatusMenuController.swift in Sources */,
 				908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WheelFix/WheelFix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -266,6 +272,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.meehow.WheelFix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -274,6 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WheelFix/WheelFix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
