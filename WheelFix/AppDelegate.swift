@@ -12,10 +12,15 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var tapper: WheelTapper!
+    var tapper: WheelTapper?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        tapper = WheelTapper()
+        do {
+            try tapper = WheelTapper(ignoreSpuriousSigns: true)
+        } catch {
+            print("Error creating tapper")
+            exit(1)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
