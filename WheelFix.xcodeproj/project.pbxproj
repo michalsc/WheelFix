@@ -11,6 +11,7 @@
 		908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AC64720CAC8E100B73296 /* AppDelegate.swift */; };
 		908AC64A20CAC8E100B73296 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64920CAC8E100B73296 /* Assets.xcassets */; };
 		908AC64D20CAC8E100B73296 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64B20CAC8E100B73296 /* MainMenu.xib */; };
+		909BF32420CC7E3B001284EC /* WheelTapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF32320CC7E3B001284EC /* WheelTapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		908AC64C20CAC8E100B73296 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		908AC64E20CAC8E100B73296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908AC64F20CAC8E100B73296 /* WheelFix.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WheelFix.entitlements; sourceTree = "<group>"; };
+		909BF32320CC7E3B001284EC /* WheelTapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelTapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				908AC64E20CAC8E100B73296 /* Info.plist */,
 				908AC64F20CAC8E100B73296 /* WheelFix.entitlements */,
 				90339B8820CAE8AA00005058 /* StatusMenuController.swift */,
+				909BF32320CC7E3B001284EC /* WheelTapper.swift */,
 			);
 			path = WheelFix;
 			sourceTree = "<group>";
@@ -97,6 +100,11 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -136,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90339B8920CAE8AA00005058 /* StatusMenuController.swift in Sources */,
+				909BF32420CC7E3B001284EC /* WheelTapper.swift in Sources */,
 				908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,7 +274,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = WheelFix/WheelFix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = WheelFix/Info.plist;
@@ -282,7 +290,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = WheelFix/WheelFix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = WheelFix/Info.plist;
