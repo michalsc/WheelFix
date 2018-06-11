@@ -29,11 +29,12 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
     let tapper = Unmanaged<WheelTapper>.fromOpaque(refcon!).takeUnretainedValue()
 
     // If wheel event is continuous, i.e. if it is pixel based
-    if 0 != event.getIntegerValueField(.scrollWheelEventIsContinuous) {
+    if 0 == event.getIntegerValueField(.scrollWheelEventIsContinuous) {
         // Get timestamp of the event and the movement delta
         let ts = event.timestamp
         let delta = event.getIntegerValueField(.scrollWheelEventPointDeltaAxis1)
-
+        let fpDelta = event.getIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1)
+        
         // Shall spurious sign changes be filtered? If yes they must occur shortly enough
         // after last event (shorter than inactivityDelay) but not be sent too quickly
         // (time distance longer than continuousDelay).
@@ -47,9 +48,17 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
                 }
             }
         }
+        if fpDelta < 0 && fpDelta > -65536 {
+            event.setIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1, value: -65536)
+        } else if fpDelta > 0 && fpDelta < 65536 {
+            event.setIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 65536)
+        }
+        
+        
         // Update last event timestamp and movement delta
         tapper.lastEventTS = ts
         tapper.lastEventDelta = delta
+        tapper.lastEventFPDelta = fpDelta
 
         // Place for further event manipulation...
     }
@@ -62,6 +71,7 @@ class WheelTapper: NSObject {
     var ignoreSpuriousSigns: Bool
     var lastEventTS: UInt64
     var lastEventDelta: Int64
+    var lastEventFPDelta: Int64
     var inactivityDelay: UInt64
     var continuousDelay: UInt64
 
@@ -73,6 +83,7 @@ class WheelTapper: NSObject {
         self.ignoreSpuriousSigns = ignoreSpuriousSigns
         self.lastEventTS = 0
         self.lastEventDelta = 0
+        self.lastEventFPDelta = 0
         self.inactivityDelay = 100000000
         self.continuousDelay = 5000000
         super.init()
