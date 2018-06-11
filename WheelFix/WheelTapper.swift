@@ -48,6 +48,13 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
                 }
             }
         }
+        if fpDelta < 0 && fpDelta > -65536 {
+            event.setIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1, value: -65536)
+        } else if fpDelta > 0 && fpDelta < 65536 {
+            event.setIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 65536)
+        }
+        
+        
         // Update last event timestamp and movement delta
         tapper.lastEventTS = ts
         tapper.lastEventDelta = delta
