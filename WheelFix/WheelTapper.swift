@@ -21,6 +21,11 @@
 
 import Cocoa
 
+protocol WheelTapperDelegate {
+    func processedEventCountChangedTo(value: UInt64)
+    func discardedEventCountChangedTo(value: UInt64)
+}
+
 // Event filter callback. Here the event will be filtered out or processed
 // according to settings in the WheelTapper class
 func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
@@ -44,6 +49,11 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
                 if delta * tapper.lastEventDelta < 0 {
                     // Just discard the event completely, do not store timestamp or
                     // delta of the event
+                    tapper.discardedEventCount = tapper.discardedEventCount + 1
+                    if ts - tapper.lastDelegateCallTS > 100000000 {
+                        tapper.lastDelegateCallTS = ts
+                        tapper.delegate?.discardedEventCountChangedTo(value: tapper.discardedEventCount)
+                    }
                     return nil
                 }
             }
@@ -53,7 +63,12 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
         } else if fpDelta > 0 && fpDelta < 65536 {
             event.setIntegerValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 65536)
         }
-        
+
+        tapper.processedEventCount = tapper.processedEventCount + 1
+        if ts - tapper.lastDelegateCallTS > 100000000 {
+            tapper.lastDelegateCallTS = ts
+            tapper.delegate?.processedEventCountChangedTo(value: tapper.processedEventCount)
+        }
         
         // Update last event timestamp and movement delta
         tapper.lastEventTS = ts
@@ -67,25 +82,43 @@ func myCGEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent
     return Unmanaged.passRetained(event)
 }
 
-class WheelTapper: NSObject {
+class WheelTapper: NSObject, PreferencesWindowDelegate {
     var ignoreSpuriousSigns: Bool
     var lastEventTS: UInt64
     var lastEventDelta: Int64
     var lastEventFPDelta: Int64
     var inactivityDelay: UInt64
     var continuousDelay: UInt64
+    var discardedEventCount: UInt64
+    var processedEventCount: UInt64
+    var lastDelegateCallTS: UInt64
+
+    var delegate: WheelTapperDelegate?
+
+    func preferencesDidUpdate() {
+        let defaults = UserDefaults.standard
+
+        ignoreSpuriousSigns = defaults.value(forKey: "ignoreSpuriousSigns") as? Bool ?? true
+        inactivityDelay = defaults.value(forKey: "inactivityDelay") as? UInt64 ?? 100000000
+        continuousDelay = defaults.value(forKey: "continuousDelay") as? UInt64 ?? 5000000
+    }
 
     enum TapperError : Error {
         case cannotCreateEventTap
     }
 
     init(ignoreSpuriousSigns: Bool) throws {
-        self.ignoreSpuriousSigns = ignoreSpuriousSigns
+        let defaults = UserDefaults.standard
+
+        self.ignoreSpuriousSigns = defaults.value(forKey: "ignoreSpuriousSigns") as? Bool ?? ignoreSpuriousSigns
         self.lastEventTS = 0
         self.lastEventDelta = 0
         self.lastEventFPDelta = 0
-        self.inactivityDelay = 100000000
-        self.continuousDelay = 5000000
+        self.inactivityDelay = defaults.value(forKey: "inactivityDelay") as? UInt64 ?? 100000000
+        self.continuousDelay = defaults.value(forKey: "continuousDelay") as? UInt64 ?? 5000000
+        self.discardedEventCount = 0
+        self.processedEventCount = 0
+        self.lastDelegateCallTS = 0
         super.init()
 
         // Observe scrollWheel events

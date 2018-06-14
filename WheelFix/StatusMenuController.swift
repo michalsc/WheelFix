@@ -21,19 +21,47 @@
 
 import Cocoa
 
-class StatusMenuController: NSObject {
+class StatusMenuController: NSObject, WheelTapperDelegate, PreferencesWindowDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    var preferencesWindow: PreferencesWindow!
+    var tapper: WheelTapper!
 
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared.terminate(self)
     }
-    
+
+    @IBAction func preferencesClicked(_ sender: NSMenuItem) {
+        preferencesWindow.showWindow(nil)
+    }
+
+    func preferencesDidUpdate() {
+        debugPrint("Controller.preferencesDidUpdate")
+        tapper?.preferencesDidUpdate()
+    }
+
+    func processedEventCountChangedTo(value: UInt64) {
+        statusMenu.item(withTag: 1)?.title = "Events processed: " + String(value)
+    }
+
+    func discardedEventCountChangedTo(value: UInt64) {
+        statusMenu.item(withTag: 2)?.title = "Events discarded: " + String(value)
+    }
+
     override func awakeFromNib() {
         let icon = NSImage(named: NSImage.Name(rawValue: "statusIcon"))
         icon?.isTemplate = true
         statusItem.image = icon
         statusItem.menu = statusMenu
+        do {
+            try tapper = WheelTapper(ignoreSpuriousSigns: true)
+        } catch {
+
+        }
+        preferencesWindow = PreferencesWindow()
+
+        preferencesWindow?.delegate = self
+        tapper?.delegate = self
     }
 }

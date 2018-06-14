@@ -21,15 +21,24 @@
         </customObject>
         <menu id="9dx-Pl-uSY">
             <items>
-                <menuItem title="About" id="rE3-9a-Mkf">
+                <menuItem title="Preferences..." id="rE3-9a-Mkf">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="K87-Xd-OdN" id="cpl-Iw-bIj"/>
+                    </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="0wl-mC-rAT"/>
                 <menuItem title="Quit" id="Vzx-R1-215">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quitClicked:" target="K87-Xd-OdN" id="ME2-kK-jPu"/>
                     </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="0wl-mC-rAT"/>
+                <menuItem title="Events processed: 0" tag="1" id="LM0-db-7aT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Events discarded: 0" tag="2" id="4eu-f7-wfr">
+                    <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="138.5" y="165.5"/>

@@ -11,6 +11,8 @@
 		908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AC64720CAC8E100B73296 /* AppDelegate.swift */; };
 		908AC64A20CAC8E100B73296 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64920CAC8E100B73296 /* Assets.xcassets */; };
 		908AC64D20CAC8E100B73296 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908AC64B20CAC8E100B73296 /* MainMenu.xib */; };
+		9098153E20CF1EBF004F1337 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9098153C20CF1EBF004F1337 /* PreferencesWindow.swift */; };
+		9098153F20CF1EBF004F1337 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9098153D20CF1EBF004F1337 /* PreferencesWindow.xib */; };
 		909BF32420CC7E3B001284EC /* WheelTapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF32320CC7E3B001284EC /* WheelTapper.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +24,8 @@
 		908AC64C20CAC8E100B73296 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		908AC64E20CAC8E100B73296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908AC64F20CAC8E100B73296 /* WheelFix.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WheelFix.entitlements; sourceTree = "<group>"; };
+		9098153C20CF1EBF004F1337 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		9098153D20CF1EBF004F1337 /* PreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		909BF32320CC7E3B001284EC /* WheelTapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelTapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +66,8 @@
 				908AC64F20CAC8E100B73296 /* WheelFix.entitlements */,
 				90339B8820CAE8AA00005058 /* StatusMenuController.swift */,
 				909BF32320CC7E3B001284EC /* WheelTapper.swift */,
+				9098153C20CF1EBF004F1337 /* PreferencesWindow.swift */,
+				9098153D20CF1EBF004F1337 /* PreferencesWindow.xib */,
 			);
 			path = WheelFix;
 			sourceTree = "<group>";
@@ -132,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				908AC64A20CAC8E100B73296 /* Assets.xcassets in Resources */,
+				9098153F20CF1EBF004F1337 /* PreferencesWindow.xib in Resources */,
 				908AC64D20CAC8E100B73296 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9098153E20CF1EBF004F1337 /* PreferencesWindow.swift in Sources */,
 				90339B8920CAE8AA00005058 /* StatusMenuController.swift in Sources */,
 				909BF32420CC7E3B001284EC /* WheelTapper.swift in Sources */,
 				908AC64820CAC8E100B73296 /* AppDelegate.swift in Sources */,
